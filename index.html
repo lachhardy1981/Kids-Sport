@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kids Sport Fixtures</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; color: #333; min-height: 100vh; }
+
+    header { background: #1a1a2e; color: white; padding: 1.5rem; text-align: center; }
+    header h1 { font-size: 1.6rem; font-weight: 600; }
+
+    .container { max-width: 640px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+    .back-btn { background: none; border: none; color: #555; font-size: 1rem; cursor: pointer; margin-bottom: 1rem; display: none; padding: 0.4rem 0; }
+    .back-btn:hover { color: #1a1a2e; }
+    .back-btn::before { content: '← '; }
+
+    .kid-buttons { display: flex; flex-direction: column; gap: 1rem; }
+    .kid-btn { padding: 1.5rem; font-size: 1.3rem; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; color: white; transition: transform 0.1s, box-shadow 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+    .kid-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+    .kid-btn:active { transform: translateY(0); }
+    .kid-btn.oliver { background: #2563eb; }
+    .kid-btn.eliza { background: #9333ea; }
+    .kid-btn.frankie { background: #e11d48; }
+
+    .sport-buttons { display: none; flex-direction: column; gap: 1rem; }
+    .sport-btn { padding: 1.2rem; font-size: 1.1rem; font-weight: 600; border: none; border-radius: 12px; cursor: pointer; color: white; background: #374151; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.1s; }
+    .sport-btn:hover { transform: translateY(-2px); }
+
+    .fixtures { display: none; }
+
+    .section-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .section-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 1.2rem; }
+
+    .fixture-card { background: white; border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    .fixture-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: #1a1a2e; }
+    .fixture-detail { font-size: 0.9rem; color: #555; line-height: 1.6; }
+    .fixture-detail .time { font-weight: 600; color: #333; }
+    .fixture-detail .teams { margin-top: 0.4rem; font-size: 1rem; font-weight: 600; color: #1a1a2e; }
+    .fixture-detail .highlight { color: #2563eb; font-weight: 700; }
+
+    .venue-link { color: #2563eb; text-decoration: none; font-weight: 500; }
+    .venue-link:hover { text-decoration: underline; }
+
+    .schedule-card { background: white; border-radius: 12px; padding: 1.2rem; margin-bottom: 1rem; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    .schedule-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; color: #1a1a2e; }
+    .schedule-row { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.9rem; color: #555; border-bottom: 1px solid #f0f0f0; }
+    .schedule-row:last-child { border-bottom: none; }
+    .schedule-row .days { font-weight: 600; color: #333; }
+
+    .source-link { display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; color: #888; text-decoration: none; }
+    .source-link:hover { color: #2563eb; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Kids Sport Fixtures</h1>
+  </header>
+
+  <div class="container">
+    <button class="back-btn" id="backBtn">Back</button>
+
+    <!-- Kid selection -->
+    <div class="kid-buttons" id="kidButtons">
+      <button class="kid-btn oliver" onclick="showKid('oliver')">Oliver</button>
+      <button class="kid-btn eliza" onclick="showKid('eliza')">Eliza</button>
+      <button class="kid-btn frankie" onclick="showKid('frankie')">Frankie</button>
+    </div>
+
+    <!-- Sport selection per kid -->
+    <div class="sport-buttons" id="oliverSports">
+      <button class="sport-btn" onclick="showFixtures('oliverRugby')">🏉 Rugby Union</button>
+      <button class="sport-btn" onclick="showFixtures('oliverSwimming')">🏊 Squad Swimming</button>
+    </div>
+
+    <div class="sport-buttons" id="elizaSports">
+      <p style="color: #888; text-align: center; padding: 2rem 0;">No sports added yet</p>
+    </div>
+
+    <div class="sport-buttons" id="frankieSports">
+      <p style="color: #888; text-align: center; padding: 2rem 0;">No sports added yet</p>
+    </div>
+
+    <!-- Oliver Rugby Fixtures -->
+    <div class="fixtures" id="oliverRugby">
+      <div class="section-title">SJRU Grading Gala U12s</div>
+      <div class="section-subtitle">Narrabeen Tigers Gold 12 · Season 2026</div>
+
+      <div class="fixture-card">
+        <h3>Game 1</h3>
+        <div class="fixture-detail">
+          <div class="time">Sun, Mar 29, 2026 · 8:30 AM</div>
+          <div><a class="venue-link" href="https://www.google.com/maps/search/Keirle+Park+Field+3" target="_blank" rel="noopener">Keirle Park Field 3</a></div>
+          <div class="teams"><span class="highlight">Narrabeen Tigers Gold 12</span> vs Lane Cove/St Ives 12</div>
+        </div>
+      </div>
+
+      <div class="fixture-card">
+        <h3>Game 2</h3>
+        <div class="fixture-detail">
+          <div class="time">Sun, Mar 29, 2026 · 9:20 AM</div>
+          <div><a class="venue-link" href="https://www.google.com/maps/search/Keirle+Park+Field+3" target="_blank" rel="noopener">Keirle Park Field 3</a></div>
+          <div class="teams"><span class="highlight">Narrabeen Tigers Gold 12</span> vs Chatswood Highlanders 12</div>
+        </div>
+      </div>
+
+      <div class="fixture-card">
+        <h3>Game 3</h3>
+        <div class="fixture-detail">
+          <div class="time">Sun, Mar 29, 2026 · 10:10 AM</div>
+          <div><a class="venue-link" href="https://www.google.com/maps/search/Keirle+Park+Field+2" target="_blank" rel="noopener">Keirle Park Field 2</a></div>
+          <div class="teams">Mosman Dolphins 12 vs <span class="highlight">Narrabeen Tigers Gold 12</span></div>
+        </div>
+      </div>
+
+      <a class="source-link" href="https://xplorer.rugby/sjru/fixtures-results?team=vaFgQGjDB8dvTbaYw&comp=eWs7Hx9ALSHkzduo8&season=2026&tab=Fixtures" target="_blank" rel="noopener">Source: xplorer.rugby</a>
+    </div>
+
+    <!-- Oliver Swimming -->
+    <div class="fixtures" id="oliverSwimming">
+      <div class="section-title">Squad Swimming</div>
+      <div class="section-subtitle">In2Swim · 1.5 Hour Squads</div>
+
+      <div class="schedule-card">
+        <h3>Schedule</h3>
+        <div class="schedule-row">
+          <span class="days">Monday – Friday</span>
+          <span>6:00 AM – 7:30 AM</span>
+        </div>
+        <div class="schedule-row">
+          <span class="days">Monday – Thursday</span>
+          <span>6:00 PM – 7:30 PM</span>
+        </div>
+      </div>
+
+      <div class="schedule-card">
+        <h3>Location</h3>
+        <div class="fixture-detail">
+          <a class="venue-link" href="https://www.google.com/maps/search/563+Pittwater+Road+Brookvale+NSW+2100" target="_blank" rel="noopener">563 Pittwater Road, Brookvale NSW 2100</a>
+        </div>
+      </div>
+
+      <a class="source-link" href="https://www.in2swim.com.au/swim-program/#squads" target="_blank" rel="noopener">Source: in2swim.com.au</a>
+    </div>
+  </div>
+
+  <script>
+    const history = [];
+
+    function showKid(kid) {
+      document.getElementById('kidButtons').style.display = 'none';
+      document.getElementById(kid + 'Sports').style.display = 'flex';
+      document.getElementById('backBtn').style.display = 'block';
+      history.push('kid');
+    }
+
+    function showFixtures(id) {
+      // Hide all sport buttons
+      document.querySelectorAll('.sport-buttons').forEach(el => el.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+      history.push('sport');
+    }
+
+    document.getElementById('backBtn').addEventListener('click', () => {
+      const level = history.pop();
+      if (level === 'sport') {
+        // Hide fixtures, show sport buttons for current kid
+        document.querySelectorAll('.fixtures').forEach(el => el.style.display = 'none');
+        // Find which kid's sports to show
+        const kidSports = document.querySelectorAll('.sport-buttons');
+        kidSports.forEach(el => {
+          if (el.style.display === 'none') return;
+        });
+        // Re-show the kid's sport list
+        // We need to track which kid — simplify by looking at history
+        const currentKidLevel = history[history.length - 1];
+        if (currentKidLevel === 'kid') {
+          // Show the sport panel that was previously visible
+          document.querySelectorAll('.sport-buttons').forEach(el => {
+            // Check if this panel has been used
+          });
+          // Simpler: track current kid
+          document.getElementById(currentKid + 'Sports').style.display = 'flex';
+        }
+      } else if (level === 'kid') {
+        document.querySelectorAll('.sport-buttons').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.fixtures').forEach(el => el.style.display = 'none');
+        document.getElementById('kidButtons').style.display = 'flex';
+        document.getElementById('backBtn').style.display = 'none';
+      }
+    });
+
+    let currentKid = '';
+    const origShowKid = showKid;
+    showKid = function(kid) {
+      currentKid = kid;
+      origShowKid(kid);
+    };
+  </script>
+</body>
+</html>
